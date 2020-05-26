@@ -1,5 +1,4 @@
-import React from 'react'
-import { render, screen } from '@redwoodjs/testing'
+import { render, screen, MockedProvider } from '@redwoodjs/testing'
 
 import { QUERY } from 'src/components/BlogPostCell/BlogPostCell'
 
@@ -23,7 +22,11 @@ describe('BlogPostPage', () => {
       },
     ]
 
-    render(<BlogPostPage id="id-123" />, { mocks })
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <BlogPostPage id="id-123" />
+      </MockedProvider>
+    )
 
     expect(await screen.findByText(/Post Title/)).toBeInTheDocument()
   })

@@ -7,14 +7,6 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import BlogPostPage from 'src/pages/BlogPostPage'
-import NewPostPage from 'src/pages/NewPostPage'
-import EditPostPage from 'src/pages/EditPostPage'
-import PostPage from 'src/pages/PostPage'
-import PostsPage from 'src/pages/PostsPage'
-import AboutPage from 'src/pages/AboutPage'
-import HomePage from 'src/pages/HomePage'
-import NotFoundPage from 'src/pages/NotFoundPage'
 import { Router, Route } from '@redwoodjs/router'
 
 const Routes = () => {

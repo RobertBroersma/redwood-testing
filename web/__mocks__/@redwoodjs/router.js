@@ -1,14 +1,6 @@
+import { routerMock } from '@redwoodjs/testing'
+
 export * from '@redwoodjs/router'
+const { Router, routes } = routerMock
 
-const routes = {}
-
-export const Router = ({ children }) => {
-  for (let route of React.Children.toArray(children)) {
-    const { name } = route.props
-    routes[name] = jest.fn(() => name)
-  }
-
-  return <></>
-}
-
-export { routes }
+export { Router, routes }
