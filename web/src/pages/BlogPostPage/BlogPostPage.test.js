@@ -1,23 +1,21 @@
-import { render, screen, server, graphql } from '@redwoodjs/testing'
+import { render, screen, graphql } from '@redwoodjs/testing'
 
 import BlogPostPage from './BlogPostPage'
 
 describe('BlogPostPage', () => {
   it('renders successfully', async () => {
-    server.use(
-      graphql.query('GetPost', (req, res, ctx) => {
-        return res(
-          ctx.data({
-            post: {
-              title: 'Post Title',
-              id: 'id-123',
-              body: 'Test',
-              __typename: 'Post',
-            },
-          })
-        )
-      })
-    )
+    graphql.query('GetPost', (req, res, ctx) => {
+      return res(
+        ctx.data({
+          post: {
+            title: 'Post Title',
+            id: 'id-123',
+            body: 'Test',
+            __typename: 'Post',
+          },
+        })
+      )
+    })
 
     render(<BlogPostPage id="id-123" />)
 
