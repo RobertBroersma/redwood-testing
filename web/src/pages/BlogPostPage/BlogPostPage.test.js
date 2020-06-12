@@ -1,32 +1,25 @@
-import { render, screen, MockedProvider } from '@redwoodjs/testing'
-
-import { QUERY } from 'src/components/BlogPostCell/BlogPostCell'
+import { render, screen, server, graphql } from '@redwoodjs/testing'
 
 import BlogPostPage from './BlogPostPage'
 
 describe('BlogPostPage', () => {
   it('renders successfully', async () => {
-    const mocks = [
-      {
-        request: {
-          query: QUERY,
-          variables: {
-            id: 'id-123',
-          },
-        },
-        result: {
-          data: {
-            post: { title: 'Post Title', id: 'id-123', body: 'Test' },
-          },
-        },
-      },
-    ]
-
-    render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <BlogPostPage id="id-123" />
-      </MockedProvider>
+    server.use(
+      graphql.query('GetPost', (req, res, ctx) => {
+        return res(
+          ctx.data({
+            post: {
+              title: 'Post Title',
+              id: 'id-123',
+              body: 'Test',
+              __typename: 'Post',
+            },
+          })
+        )
+      })
     )
+
+    render(<BlogPostPage id="id-123" />)
 
     expect(await screen.findByText(/Post Title/)).toBeInTheDocument()
   })

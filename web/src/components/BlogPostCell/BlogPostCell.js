@@ -1,5 +1,5 @@
 export const QUERY = gql`
-  query($id: Int!) {
+  query GetPost($id: Int!) {
     post(id: $id) {
       id
       title
