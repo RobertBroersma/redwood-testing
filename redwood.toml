@@ -1,7 +1,17 @@
 [web]
   port = 8910
   apiProxyPath = "/.netlify/functions"
+
 [api]
   port = 8911
+
 [browser]
   open = true
+
+[databases]
+  [dev]
+    provider = "sqlite"
+    url = "file:./dev.db"
+  [test]
+    provider = "sqlite"
+    url = "file:./test.db"

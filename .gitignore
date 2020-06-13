@@ -2,6 +2,7 @@
 .env
 .netlify
 dev.db
+test.db
 dist
 dist-babel
 node_modules
