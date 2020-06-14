@@ -1,7 +1,14 @@
 import { db } from 'src/lib/db'
 
-export const posts = () => {
-  return db.post.findMany()
+export const posts = async () => {
+  console.log('get posts')
+
+  try {
+    const res = await db.post.findMany()
+    console.log('RESOLVER FOUND', res)
+  } catch (e) {
+    console.error('DITTEM', e)
+  }
 }
 
 export const post = ({ id }) => {
