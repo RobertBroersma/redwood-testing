@@ -1,23 +1,25 @@
-import { render, screen, graphql, db } from '@redwoodjs/testing'
+import { render, screen, graphql } from '@redwoodjs/testing'
 
 import BlogPostPage from './BlogPostPage'
 
 describe('BlogPostPage', () => {
-  it('renders posts from the database', async () => {
-    const newPost = await db.post.create({
-      data: {
-        title: 'Test post',
-        body: 'Test post content!',
-      },
+  it('renders post succesfully', async () => {
+    graphql.query('GetPost', (req, res, ctx) => {
+      return res(
+        ctx.data({
+          post: {
+            title: 'Post Title',
+            id: 'id-123',
+            body: 'Test',
+            __typename: 'Post',
+          },
+        })
+      )
     })
 
-    render(<BlogPostPage id={newPost.id} />)
+    render(<BlogPostPage id="id-123" />)
 
-    // Tests Loading state
-    expect(screen.getByText(/Loading/i)).toBeInTheDocument()
-
-    // Tests Success state
-    expect(await screen.findByText(/Test post/)).toBeInTheDocument()
+    expect(await screen.findByText(/Post Title/)).toBeInTheDocument()
   })
 
   it('handles errors', async () => {
